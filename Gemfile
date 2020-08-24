@@ -31,6 +31,7 @@ gem 'friendly_id', '>= 5.2.4'
 gem 'rails3-jquery-autocomplete', '>= 1.0.11'
 gem 'meta-tags', '>= 2.0.0'
 gem 'i18n', '>= 0.7.0'
+gem 'bootstrap', '~> 5.0.0.alpha1'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
