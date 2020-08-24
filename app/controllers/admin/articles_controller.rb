@@ -164,7 +164,7 @@ module Admin
       # Allowed attribute with strong_params
       def article_params
         params.require(:article).permit(:content, :teaser, :hero_image, :short_hero_image, :published,
-          :published_at, :sub_title, :title, :hero_image_cache, :tag_list, :gplus_url, :featured,
+          :published_at, :sub_title, :title, :hero_image_cache, :tag_list, :gplus_url, :featured, :section_id,
           :document, :document_cache, :hero_image_file, :remove_document, :remove_hero_image, :pictures,
           pictures_attributes: [:id, :image, :name, :article_id], author_ids: [] )
       end

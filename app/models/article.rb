@@ -21,6 +21,7 @@ class Article < ApplicationRecord
   has_many :pictures
   has_many :authorables
   has_many :authors, through: :authorables
+  belongs_to :section
 
   attr_accessor :hero_image_file
   accepts_nested_attributes_for :pictures, :authors

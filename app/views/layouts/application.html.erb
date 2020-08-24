@@ -22,13 +22,15 @@
 <body class="vsc-initialized">
 
 <!--= render 'layouts/markdown_cheatsheet' %-->
+<div class="wrapper">
+  <%= render 'layouts/navbar' %>
 
-<%= render 'layouts/navbar' %>
+  <main role="main" class="container">
+    <%= render 'shared/flash' %>
+    <%= yield %>
+  </main>
+</div>
 
-<main role="main" class="container">
-  <%= render 'shared/flash' %>
-  <%= yield %>
-</main>
 
 <%= render 'shared/footer' %>
 

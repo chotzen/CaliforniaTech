@@ -76,6 +76,10 @@
       <%= f.collection_check_boxes(:author_ids, Author.all, :id, :name) %>
     </div>
 
+    <div class="input-field">
+      <%= f.collection_select(:section_id, Section.all, :id, :display_name) %>
+    </div>
+
     <h2><%= t('lines.additional_info').html_safe %></h2>
 
     <div class="input-field">

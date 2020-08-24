@@ -1,7 +1,7 @@
 <header>
   <nav class="navbar navbar-light navbar-expand-lg">
     <div class="container page-header">
-      <%= link_to "The California Tech", root_path, class: "brand brand-large navbar-brand" %>
+      <%= link_to "The California Tech", root_path, class: "brand brand-large navbar-brand highlight-orange" %>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#categories" aria-controls="categories" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -9,11 +9,9 @@
 
       <div class="collapse navbar-collapse" id="categories" style="margin-top: 10px">
         <div class="navbar-nav">
-          <a class="header-item nav-item nav-link active" href="#">Institute News</a>
-          <a class="header-item nav-item nav-link active" href="#">Commentary</a>
-          <a class="header-item nav-item nav-link active" href="#">Nation & World</a>
-          <a class="header-item nav-item nav-link active" href="#">Around Campus</a>
-          <a class="header-item nav-item nav-link active" href="#">Culture</a>
+          <% Section.all.each do |section| %>
+            <a class="header-item nav-item nav-link active" href="#"><%= section.display_name %></a>
+          <% end %>
         </div>
       </div>
 
