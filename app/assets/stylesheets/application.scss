@@ -1,4 +1,5 @@
 @import "bootstrap";
+@import "font-awesome";
 
 @font-face {
   font-family: 'Old English';
@@ -88,7 +89,7 @@ main.container {
   border-right: #999999 1px solid;
 }
 
-.article-narrow {
+.section {
   border-bottom: #999999 1px solid;
   padding-bottom: 10px;
   margin-bottom: 10px;
@@ -96,4 +97,18 @@ main.container {
 
 .article-image {
   margin-bottom: 5px;
+}
+
+.lower-col {
+  padding: 0;
+}
+
+.lower-mid-section {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.lower-left-section {
+  padding-left: 10px;
+  margin-right: 10px;
 }

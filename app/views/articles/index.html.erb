@@ -1,24 +1,20 @@
 <!-- this is the home page. -->
-<div class="row">
+<div class="row section">
   <div class="col-lg-6">
-    <div class="card">
-      <img src="<%= Article.first.image_url %>" alt="<%= Article.first.title %>"  class="card-img-top" />
-      <div class="card-body">
-        <h2 class="mb-0 article-title text-dark nowrap">Test title</h2>&nbsp;&nbsp;<span class="text-muted nowrap">By Author</span>
-        <p class="lead text-muted nomargin">Teaser blurb goes here. More teaser blurb that should hopefully wrap around to the next line. </p>
-      </div>
-    </div>
+    <img src="<%= Article.first.image_url %>" alt="<%= Article.first.title %>"  class="img-fluid article-image" />
+    <h2 class="mb-0 article-title text-dark nowrap">Test title</h2>&nbsp;&nbsp;<span class="text-muted nowrap">By Author</span>
+    <p class="lead text-muted nomargin">Teaser blurb goes here. More teaser blurb that should hopefully wrap around to the next line. </p>
 
   </div>
   <div class="col-lg-3 divider-right">
     <h4 class="normal-weight text-dark">News</h4>
-    <div class="article-narrow">
+    <div class="section">
       <img src="<%= Article.first.image_url %>" alt="<%= Article.first.title %>"  class="img-fluid article-image" />
       <h5 class="mb-0 article-title text-dark">News Article #1</h5><small class="text-muted">By Jared Molart</small><br>
       <small class="nomargin">Teaser text. teaser text. More teaser text, a 150-word summary of the article. This is less than that, but you get the idea.</small>
     </div>
 
-    <div class="article-narrow">
+    <div class="">
       <h5 class="mb-0 article-title text-dark">Ditch Day is Tomorrow!</h5><small class="text-muted">By J.R.R. Molkein</small><br>
       <small class="nomargin">Go to bed, Frosh!</small>
     </div>
@@ -26,16 +22,57 @@
   <div class="col-lg-3">
     <h4 class="normal-weight text-dark">Opinion</h4>
 
-    <div class="article-narrow">
+    <div class="section">
       <h5 class="mb-0 article-title text-dark">Hot Take #1</h5><small class="text-muted">By Ricketts Hovse</small><br>
       <small class="nomargin">Teaser relating to said hot take</small>
     </div>
 
-    <div class="article-narrow">
+    <div class="section">
       <h5 class="mb-0 article-title text-dark">Hot Take #2</h5><small class="text-muted">By Ricketts Hovse</small><br>
       <small class="nomargin">Teaser relating to said hot take</small>
     </div>
+  </div>
+</div>
 
+<div class="row">
+  <div class="col-lg-3 divider-right lower-col">
+    <div class="lower-left-section section">
+      <h5 class="mb-0 article-title text-dark">Another Article Goes Here</h5><small class="text-muted">By Another Author</small><br>
+      <small class="nomargin">More teaser text. Probably less than 150 words but enough to fill up 2 lines. </small>
+    </div>
 
+    <div class="lower-left-section section">
+      <h5 class="mb-0 article-title text-dark">Yet another article, etc</h5><small class="text-muted">By Author 5</small><br>
+      <small class="nomargin">Teaser relating to said hot take</small>
+    </div>
+  </div>
+
+  <div class="col-lg-6 divider-right lower-col">
+    <div class="row section lower-mid-section">
+      <div class="col-6 lower-col">
+        <h3 class="mb-0 article-title text-dark">Faculty Profile: Joe Shepherd</h3><p class="text-muted">By Author 5</p>
+        <p class="nomargin">Memes. All of them</p>
+      </div>
+      <div class="col-6 lower-col">
+        <img src="<%= Article.first.image_url %>" alt="<%= Article.first.title %>"  class="img-fluid " />
+      </div>
+    </div>
+    <div class="row section lower-mid-section">
+
+      <div class="col-6 lower-col">
+        <h3 class="mb-0 article-title text-dark">Cultural Article</h3><p class="text-muted">By Daniel E. Institute</p>
+        <p class="nomargin">Memes. All of them</p>
+      </div>
+      <div class="col-6 lower-col">
+        <img src="<%= Article.first.image_url %>" alt="<%= Article.first.title %>" class="img-fluid " />
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-3">
+    <div class="section">
+      <h5 class="mb-0 article-title text-dark">Announcements Go Here</h5><small class="text-muted">By ASCIT or whatever</small><br>
+      <small class="nomargin">Teaser relating to said hot take</small>
+    </div>
   </div>
 </div>

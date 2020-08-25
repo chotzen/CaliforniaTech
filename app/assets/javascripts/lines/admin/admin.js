@@ -174,7 +174,7 @@ editor = function(el) {
   this.wrapper = $(this.cm.getTextArea()).parent();
 
   // Create and inset moving widget before editor
-  this.movingWidget = $('<div class="cm-movingwidget icon-add-image"></div>');
+  this.movingWidget = $('<div class="cm-movingwidget fa fa-images">add image</div>');
   $(el).before(this.movingWidget);
 
   // Save `this` for usage inside child-functions

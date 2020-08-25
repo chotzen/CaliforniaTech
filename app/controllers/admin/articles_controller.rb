@@ -31,7 +31,7 @@ module Admin
       @first_page = true
 
       respond_to do |format|
-        format.html {render :show, layout: 'preview'}
+        format.html {render :show}
       end
     end
 

@@ -1,103 +1,108 @@
-<% if @article.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@article.errors.count, "error") %> prohibited this article from being saved:</h2>
-    <ul>
-    <% @article.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
+
+<div class="row">
+  <div class="col-lg-8">
+    <% if @article.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@article.errors.count, "error") %> prohibited this article from being saved:</h2>
+        <ul>
+          <% @article.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+        <a href="#" class="close">x</a>
+      </div>
     <% end %>
-    </ul>
-    <a href="#" class="close">x</a>
-  </div>
-<% end %>
 
-<%= form_for([:admin, @article], id: 'article_form') do |f| %>
-  <div class="new-article">
-    <div class="hero-upload">
-      <%= f.file_field :hero_image %>
-      <%= f.hidden_field :remove_hero_image %>
-      <div class="btn-change-hero"><%= t('lines.buttons.change') %></div>
-      <% if @article.short_hero_image.present? %>
-        <img src="<%= @article.short_hero_image %>" alt="" />
-      <% elsif @article.hero_image? %>
-        <img src="<%= @article.hero_image %>" alt="" />
-      <% end %>
-      <%= f.hidden_field :hero_image_file %>
-      <div class="upload-overlay">
-        <div class="upload-overlay-close icon-close"></div>
-        <div class="upload-overlay-inner">
-          <h2><%= t('lines.buttons.select_hero_image') %></h2>
-          <div class="btn-remove-hero<%= " show" if @article.hero_image? || @article.short_hero_image %>"><%= t('lines.buttons.remove_hero_image') %></div>
-          <%= f.label :hero_image, t('lines.buttons.upload_image') %>
-          <div class="hero-images">
-            <% Article::HERO_IMAGES.each_with_index do |h, i| %>
-              <img src="<%= "/heroes/#{h}" %>" alt="" class="<%= 'selected-hero-image' if ('/heroes/' + h) == @article.short_hero_image %>" />
-            <% end %>
-            <%= f.hidden_field :short_hero_image, class: "short-hero-image-cache" %>
-          </div>
-        </div>
-        <div class="hero-background-overlay"></div>
-      </div>
-    </div>
 
-    <div class="input-field required">
-      <%= f.text_field :title, placeholder: true, class: 'title' %>
-    </div>
+    <%= form_for([:admin, @article], id: 'article_form') do |f| %>
 
-    <div class="input-field">
-      <%= f.text_field :sub_title, placeholder: true %>
-    </div>
 
-    <div class="input-field">
-      <%= f.text_area :teaser, placeholder: true, rows: 1 %>
-    </div>
-
-    <div class="input-field editor required">
-      <%= f.text_area :content, placeholder: true, rows: 1, data: {editor: "codemirror"} %>
-    </div>
-
-    <div class="input-field">
-      <div class="documents">
-        <%= f.label :document, "#{@article.document? ? @article.document.file.filename + ' <span>(' + number_to_human_size(@article.document.file.size) + ')</span>' : t('lines.buttons.attach_document').html_safe }".html_safe, class: "attachment-label", title: t('lines.buttons.change_attachment').html_safe -%>
-        <% if @article.document? %>
-          <span class="icon-delete btn-delete-attachment" title="<%= t('lines.buttons.remove_attachment').html_safe %>"></span>
+      <div class="hero-upload">
+        <%= f.file_field :hero_image %>
+        <%= f.hidden_field :remove_hero_image %>
+        <div class="btn-change-hero"><%= t('lines.buttons.change') %></div>
+        <% if @article.short_hero_image.present? %>
+          <img src="<%= @article.short_hero_image %>" alt="" />
+        <% elsif @article.hero_image? %>
+          <img src="<%= @article.hero_image %>" alt="" />
         <% end %>
-        <%= f.file_field :document, class: "article-document-value" %>
-        <div class="hidden">
-          <%= f.hidden_field :document_cache %>
-          <%= f.check_box :remove_document %>
+        <%= f.hidden_field :hero_image_file %>
+        <div class="upload-overlay">
+          <div class="upload-overlay-close icon-close"></div>
+          <div class="upload-overlay-inner">
+            <h2><%= t('lines.buttons.select_hero_image') %></h2>
+            <div class="btn-remove-hero<%= " show" if @article.hero_image? || @article.short_hero_image %>"><%= t('lines.buttons.remove_hero_image') %></div>
+            <%= f.label :hero_image, t('lines.buttons.upload_image') %>
+            <div class="hero-images">
+              <% Article::HERO_IMAGES.each_with_index do |h, i| %>
+                <img src="<%= "/heroes/#{h}" %>" alt="" class="<%= 'selected-hero-image' if ('/heroes/' + h) == @article.short_hero_image %>" />
+              <% end %>
+              <%= f.hidden_field :short_hero_image, class: "short-hero-image-cache" %>
+            </div>
+          </div>
+          <div class="hero-background-overlay"></div>
         </div>
       </div>
 
-    </div>
+      <div class="form-group row">
+        <%= f.label :title, class: 'col-sm-2 col-form-label'%>
+        <div class="col-sm-10">
+          <%= f.text_field :title, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= f.label :sub_title, "Subtitle", class: 'col-sm-2 col-form-label'%>
+        <div class="col-sm-10">
+          <%= f.text_field :sub_title, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= f.label :teaser, class: 'col-sm-2 col-form-label'%>
+        <div class="col-sm-10">
+          <%= f.text_field :teaser, class: 'form-control' %>
+        </div>
+      </div>
 
-    <h2><%= t('activerecord.models.lines/author', count: 2) %> <span style="color: #c10020;">*</span></h2>
+      <div class="input-field editor">
+        <%= f.text_area :content, placeholder: true, rows: 1, data: {editor: "codemirror"} %>
+      </div>
 
-    <div class="input-field checkbox">
-      <%= f.collection_check_boxes(:author_ids, Author.all, :id, :name) %>
-    </div>
 
-    <div class="input-field">
-      <%= f.collection_select(:section_id, Section.all, :id, :display_name) %>
-    </div>
+      <div class="row form-group">
+        <%= f.label :authors, class: 'col-sm-2'%>
+        <div class="col-sm-10">
+          <%= f.collection_check_boxes :author_ids, Author.all, :id, :name do |b|
+            content_tag(:div, class: "form-check") do
+              b.check_box(class: "form-check-input") + b.label(class: "form-check-label")
+            end
+          end %>
+        </div>
+      </div>
 
-    <h2><%= t('lines.additional_info').html_safe %></h2>
+      <br>
 
-    <div class="input-field">
-      <%= f.autocomplete_field :tag_list, autocomplete_tag_name_admin_articles_path, :"data-delimiter" => ', ', placeholder: "Tags" %>
-    </div>
+      <div class="row form-group">
+        <%= f.label :sections, class: 'col-sm-2'%>
+        <div class="col-sm-10">
+          <%= f.collection_radio_buttons :section_id, Section.all, :id, :display_name do |b|
+            content_tag(:div, class: "form-check") do
+              b.radio_button(class: "form-check-input") + b.label(class: "form-check-label")
+            end
+          end %>
+        </div>
+      </div>
+      <br>
+      <div class="row form-group">
+        <%= f.label :published_at, class: 'col-sm-2' %>
+        <div class="col-sm-10">
+          <%= f.text_field :published_at, value: (@article.published_at || Time.now).strftime("%Y-%m-%d"), 'data-behaviour' => 'datepicker', placeholder: "Published on" %>
+        </div>
+      </div>
 
-    <div class="input-field">
-      <%= f.text_field :gplus_url, placeholder: true %>
-    </div>
+      <%= f.submit %>
 
-    <div class="input-field required">
-      <%= f.text_field :published_at, value: (@article.published_at || Time.now).strftime("%Y-%m-%d"), 'data-behaviour' => 'datepicker', placeholder: "Published on" %>
-    </div>
+    <% end %>
 
-    <%= render_navbar do %>
-      <%= f.submit t('lines.buttons.save_article').html_safe, class: "btn btn-save-publish highlight" %>
-      <%= link_to t('lines.buttons.cancel').html_safe, admin_articles_path, class: "btn btn-cancel" %>
-    <% end %>        
-
+    <br><br><br>
   </div>
-<% end %>
+</div>

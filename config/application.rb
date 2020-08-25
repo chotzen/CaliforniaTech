@@ -30,5 +30,7 @@ module CaliforniaTech
     # Don't generate system test files.
     config.generators.system_tests = nil
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
+    config.action_view.prefix_partial_path_with_controller_namespace = false
+
   end
 end

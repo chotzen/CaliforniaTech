@@ -2,6 +2,22 @@
   <nav class="navbar navbar-light navbar-expand-lg">
     <div class="container page-header">
       <%= link_to "The California Tech", root_path, class: "brand brand-large navbar-brand highlight-orange" %>
+      <% if env == :admin %>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#categories" aria-controls="categories" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="categories" style="margin-top: 10px">
+          <div class="navbar-nav">
+            <a class="header-item nav-item nav-link active text-muted" href="#">Admin Panel</a>
+            <a class="header-item nav-item nav-link active" href="#">Articles</a>
+            <a class="header-item nav-item nav-link active" href="#">Layout</a>
+            <a class="header-item nav-item nav-link active" href="#">Authors</a>
+          </div>
+        </div>
+
+
+      <% else %>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#categories" aria-controls="categories" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -18,6 +34,8 @@
       <div class="justify-content-end">
         <a href="#" class="btn btn-sm btn-outline-secondary" style="margin-top: 10px">Subscribe</a>
       </div>
+
+      <% end  %>
     </div>
 
   </nav>
