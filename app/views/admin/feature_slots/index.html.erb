@@ -1,0 +1,19 @@
+<h2>Edit Featured Articles</h2>
+
+<div class="row">
+  <div class="col-md-2">
+    Position
+  </div>
+  <div class="col-md-2">
+    Priority
+  </div>
+  <div class="col-md-4">
+    Article
+  </div>
+  <div class="col-md-2">
+    Image Hidden
+  </div>
+</div>
+<% @feature_slots.each do |slot| %>
+  <%= render 'admin/feature_slots/form', feature_slot: slot %>
+<% end %>

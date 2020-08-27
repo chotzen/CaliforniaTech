@@ -15,18 +15,14 @@ class ArticlesController < ApplicationController
   def index
     respond_to do |format|
       format.html {
-        @first_page = (params[:page] and params[:page].to_i > 0) ? false : true
-        if params[:tag]
-          @articles = Article.published.tagged_with(params[:tag]).page(params[:page].to_i)
-        else
-          @articles = Article.published.page(params[:page].to_i).padding(1)
-        end
+        @main = FeatureSlot.where(position: :main).first.article
+        @opinion = FeatureSlot.where(position: :opinion).has_article.map {|fs| fs.article}
+        @side_news = FeatureSlot.where(position: :side_news).has_article.map {|fs| fs.article}
+        @faculty_profile = FeatureSlot.where(position: :faculty_profile).first.article
+        @culture_feature = FeatureSlot.where(position: :culture_feature).first.article
 
-        if @articles.first_page?
-          if @first_article = Article.published.first
-            @first_article.teaser = nil unless @first_article.teaser.present?
-          end
-        end
+        @other_news = Article.where(feature_slot_id: nil).where.not(section_id: 6).published.limit(5)
+        @announcements = Article.where(section_id: 6).published.limit(5)
 
         set_meta_tags title: SITE_TITLE,
                       description: CONFIG[:meta_description],

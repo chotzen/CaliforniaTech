@@ -38,10 +38,10 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
   gem 'factory_girl_rails', require: false
+  gem 'faker'
 end
 
 group :test do
-  gem 'faker'
   gem 'capybara'
   gem 'shoulda-matchers'
   gem 'guard-rspec', '= 4.2.0'

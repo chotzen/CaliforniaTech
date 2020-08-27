@@ -12,7 +12,7 @@ module Admin
 
     # Shows an author
     def show
-      @author = Author.find(params[:id])
+      @author = Author.friendly.find(params[:id])
     end
 
     # New author
@@ -22,7 +22,7 @@ module Admin
 
     # Edit an existing author
     def edit
-      @author = Author.find(params[:id])
+      @author = Author.friendly.find(params[:id])
     end
 
     # Create a new author from params
@@ -38,7 +38,7 @@ module Admin
 
     # Update an existing author from params
     def update
-      @author = Author.find(params[:id])
+      @author = Author.friendly.find(params[:id])
 
       if @author.update_attributes(author_params)
         redirect_to admin_author_path(@author)
@@ -49,7 +49,7 @@ module Admin
 
     # Delete an author
     def destroy
-      @author = Author.find(params[:id])
+      @author = Author.friendly.find(params[:id])
       if @author.destroy
         redirect_to admin_authors_url
       else

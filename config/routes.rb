@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'feature_slots/index'
+    get 'feature_slots/update'
+  end
+  get 'authors/show'
     get 'password_resets/new'
     get 'password_resets/edit'
 
@@ -8,6 +13,7 @@ Rails.application.routes.draw do
 
     resources :sessions
     resources :password_resets,     only: [:new, :create, :edit, :update]
+    resources :authors, only: [:show]
 
     resources :articles, only: [:index, :show] do
       get 'page/:page', action: :index, on: :collection
@@ -27,6 +33,7 @@ Rails.application.routes.draw do
       resources :authors
       resources :pictures, only: [:create, :update, :destroy]
       resources :users
+      resources :feature_slots, only: [:index, :update]
       root :to => 'articles#index'
     end
 

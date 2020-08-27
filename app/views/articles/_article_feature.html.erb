@@ -1,0 +1,6 @@
+<img src="<%= article.image_url %>" alt="<%= article.title %>"  class="img-fluid article-image" />
+<%= link_to article_path(article), class: "article-title" do %>
+  <h2 class="mb-0 article-title text-dark nowrap"><%= article.title %></h2>
+  <% end %>
+&nbsp;&nbsp;<span class="text-muted nowrap">By <%= display_article_authors(article) %></span>
+<p class="lead text-muted nomargin"><%= article.teaser.html_safe %></p>

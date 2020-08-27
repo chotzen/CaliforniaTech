@@ -1,6 +1,9 @@
 @import "bootstrap";
 @import "font-awesome";
 
+$border-width: 1px;
+$border-color: #999;
+
 @font-face {
   font-family: 'Old English';
   src: font_url('OLDENGL.ttf') format("truetype");
@@ -85,14 +88,8 @@ main.container {
   margin-bottom: 0;
 }
 
-.divider-right {
-  border-right: #999999 1px solid;
-}
-
 .section {
-  border-bottom: #999999 1px solid;
-  padding-bottom: 10px;
-  margin-bottom: 10px;
+
 }
 
 .article-image {
@@ -111,4 +108,90 @@ main.container {
 .lower-left-section {
   padding-left: 10px;
   margin-right: 10px;
+}
+
+.img-caption {
+  width: 100%;
+  border-bottom: #999999 1px solid;
+  font-size: 0.875em;
+  margin-bottom: 15px;
+  padding-bottom: 0.5em;
+  padding-top: 0.5em;
+}
+
+.article_content {
+  font-size: 1.05em;
+}
+
+.article-footer {
+  margin-bottom: 3em;
+}
+
+.article_content > p > strong > em {
+  display: block;
+  font-style: normal;
+  font-weight: 400;
+  width: 100%;
+  border-bottom: #999999 1px solid;
+  font-size: 0.875em;
+  margin-bottom: 15px;
+  padding-bottom: 0.5em;
+  padding-top: 0.5em;
+  color: #6c757d;
+}
+
+
+.divider {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-bottom: 1px solid #999 !important;
+  margin: 10px 0;
+  padding: 0;
+}
+
+.article-title {
+  text-decoration: none !important;
+}
+
+/*
+ * Define .border-{size}-top/right/left/bottom etc. for bootstrap breakpoints
+ */
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    .border#{$infix}-top {      border-top: $border-width solid $border-color !important; }
+    .border#{$infix}-right {    border-right: $border-width solid $border-color !important; }
+    .border#{$infix}-bottom {   border-bottom: $border-width solid $border-color !important; }
+    .border#{$infix}-left {     border-left: $border-width solid $border-color !important; }
+
+    .border#{$infix}-top-0 {    border-top: 0 !important; }
+    .border#{$infix}-right-0 {  border-right: 0 !important; }
+    .border#{$infix}-bottom-0 { border-bottom: 0 !important; }
+    .border#{$infix}-left-0 {   border-left: 0 !important; }
+
+    .border#{$infix}-x {
+      border-left: $border-width solid $border-color !important;
+      border-right: $border-width solid $border-color !important;
+    }
+
+    .border#{$infix}-y {
+      border-top: $border-width solid $border-color !important;
+      border-bottom: $border-width solid $border-color !important;
+    }
+    // support of .border-sm (-md, -lg, -xl)
+    .border#{$infix} {
+      border-top: $border-width solid $border-color !important;
+      border-bottom: $border-width solid $border-color !important;
+      border-left: $border-width solid $border-color !important;
+      border-right: $border-width solid $border-color !important;
+    }
+    .border#{$infix}-0 {
+      border-top: 0 !important;
+      border-bottom: 0 !important;
+      border-left: 0 !important;
+      border-right: 0 !important;
+    }
+  }
 }

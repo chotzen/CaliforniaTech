@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_25_023325) do
+ActiveRecord::Schema.define(version: 2020_08_27_063512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,10 @@ ActiveRecord::Schema.define(version: 2020_08_25_023325) do
     t.string "short_hero_image"
     t.text "teaser"
     t.bigint "section_id"
+    t.text "hero_caption"
+    t.text "author_bio", default: ""
+    t.bigint "feature_slot_id"
+    t.index ["feature_slot_id"], name: "index_articles_on_feature_slot_id"
     t.index ["section_id"], name: "index_articles_on_section_id"
     t.index ["slug"], name: "index_articles_on_slug", unique: true
   end
@@ -51,22 +55,16 @@ ActiveRecord::Schema.define(version: 2020_08_25_023325) do
     t.datetime "updated_at", null: false
     t.text "description"
     t.string "gplus_profile"
+    t.string "slug"
+    t.index ["slug"], name: "index_authors_on_slug", unique: true
   end
 
   create_table "feature_slots", force: :cascade do |t|
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "features", force: :cascade do |t|
-    t.integer "priority"
-    t.bigint "article_id"
-    t.bigint "feature_slot_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["article_id"], name: "index_features_on_article_id"
-    t.index ["feature_slot_id"], name: "index_features_on_feature_slot_id"
+    t.integer "priority", default: 1
+    t.boolean "hide_image", default: true
   end
 
   create_table "friendly_id_slugs", id: :serial, force: :cascade do |t|

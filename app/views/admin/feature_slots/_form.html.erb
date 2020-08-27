@@ -1,0 +1,30 @@
+<!-- takes `feature_slot` as a param -->
+
+<%= form_for feature_slot, url: admin_feature_slot_path(feature_slot), class: 'row' do |f| %>
+  <div class="row", style="padding-top: 2px; padding-bottom: 2px;">
+    <div class="col-md-2">
+      <b><%= feature_slot.position.to_s.capitalize %></b>
+    </div>
+    <div class="col-md-2">
+      <b><%= feature_slot.priority %></b>
+    </div>
+    <div class="col-md-4">
+      <%= f.fields_for :article, feature_slot.article || Article.new(title: "None") do |article_form| %>
+        <%= article_form.select :id, [['None', nil]] + @articles.map {|ar| [ar.title, ar.id]}, {}, onchange: "this.form.submit()" %>
+      <% end %>
+    </div>
+    <div class="col-md-1">
+      <%= f.check_box :hide_image, onchange: "this.form.submit()" %>
+    </div>
+    <div class="col-md-3">
+
+    </div>
+  </div>
+
+<% end %>
+
+
+
+<script>
+  $("input#feature_slot_article_attributes_id").remove();
+</script>

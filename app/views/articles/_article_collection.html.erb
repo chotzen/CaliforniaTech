@@ -1,5 +1,9 @@
-<%= render partial: 'article_small', locals: { article_small: article_collection, article_class: 'small', article_counter: article_collection_counter } %>
+<!-- params:
+  - articles: a list of articles -->
+<% params[:articles].each_with_index do |art, idx| %>
 
-<% if (article_collection_counter % 2) != 0 %>
-  <div class="breaker" style="clear:both;height:1px;line-height:1px">&nbsp;</div>
+  <%= render 'articles/small_display', params: {article: art, image: art.feature_slot.nil? || !art.feature_slot.hide_image } %>
+  <% unless idx == params[:articles].count - 1 %>
+    <div class="divider"></div>
+  <% end %>
 <% end %>

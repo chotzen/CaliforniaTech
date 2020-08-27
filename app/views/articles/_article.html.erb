@@ -1,20 +1,24 @@
 <br>
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-lg-7 offset-lg-1">
     <% cache article do %>
-      <div class="article_header section">
+      <div class="article_header">
         <%= content_tag :h1, article.title, style: "margin-bottom: 0"%>
         <%= content_tag :p, article.sub_title, class: 'lead nomargin'%>
         <small class="text-muted"%>By <%= display_article_authors(article) %> | Published <%= article.published_at.strftime("%m/%d/%Y")%></small>
-
       </div>
+      <div class="divider"></div>
       <% unless article.image_url.blank? %>
         <div class="hero_image">
           <%= link_to article_path(article) do %>
             <img src="<%= article.image_url %>" alt="<%= article.title %>" class="img-fluid" />
           <% end %>
 
-          <small class="section">caption</small>
+          <div class="img-caption text-muted">
+            <% unless article.hero_caption.nil? || article.hero_caption.empty? %>
+              <%=  article.hero_caption  %>
+            <% end %>
+          </div>
         </div>
       <% end %>
 
@@ -27,21 +31,16 @@
         <% end %>
       </div>
 
-      <% unless article.gplus_url.blank? %>
-        <div class="article_googleplus">
-          <a href="<%= article.gplus_url %>">Discuss this article at Google+</a>
-        </div>
-      <% end %>
-
       <hr>
 
-      <div class="article_footer">
-        Written on <span class="published_at"><%= article.published_at.to_date %></span> by <%= display_article_authors(article, true) %>
+      <div class="article-footer">
+        <%= article.author_bio %>
       </div>
 
     <% end %>
   </div>
-  <div class="col-md-2">
-    Other content can go here
+  <div class="col-lg-3">
+    <h4 class="normal-weight text-dark">Recommended For You</h4>
+    <%= render 'articles/article_collection', params: {articles: Article.all.sample(3)} %>
   </div>
 </div>

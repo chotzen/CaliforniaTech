@@ -1,0 +1,16 @@
+<div>
+  <% if params[:image] %>
+    <% unless params[:article].image_url.blank? %>
+      <div class="article-image">
+        <%=  link_to article_path(params[:article]) do  %>
+          <img src="<%=  params[:article].image_url  %>" alt="<%=  params[:article].title  %>" class="img-fluid"/>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+  <%= link_to article_path(params[:article]), class: "article-title" do %>
+    <h5 class="mb-0 article-title text-dark"><%= params[:article].title %></h5>
+  <% end %>
+  <small class="text-muted">By <%= display_article_authors(params[:article]) %></small><br>
+  <small class="nomargin"><%= render_teaser(params[:article]).html_safe %></small>
+</div>

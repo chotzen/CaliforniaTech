@@ -5,9 +5,13 @@
 
 class Author < ApplicationRecord
 
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+
   # Relations
   has_many :authorables
   has_many :articles, through: :authorables
+
 
   # Validations
   validates :name, :email, :description, presence: true
