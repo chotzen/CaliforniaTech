@@ -1,0 +1,16 @@
+<h1 class="text-dark nomargin">Issue <%= @issue.issue %></h1>
+<p class="lead text-muted nomargin">Volume <%= @issue.volume %> | Published <%= @issue.date.strftime("%m/%d/%Y") %></p>
+<div class="divider"></div>
+<div class="row">
+  <div class="col-sm-3 border-sm-right">
+    pdf and preview image will go here eventually
+
+  </div>
+  <div class="col-sm-9">
+
+    <% @articles.each do |article| %>
+      <%= render 'articles/horizontal_feature', article: article, heading: article.section.display_name %>
+      <div class="divider"></div>
+    <% end %>
+  </div>
+</div>

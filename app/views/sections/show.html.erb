@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-md-7">
+    <h1 class="normal-weight"><%= @section.display_name %></h1>
+    <div class="divider"></div>
+
+    <% @articles.each do |article| %>
+
+      <%= render 'articles/horizontal_feature', article: article, heading: "" %>
+      <div class="divider"></div>
+    <% end %>
+  </div>
+</div>

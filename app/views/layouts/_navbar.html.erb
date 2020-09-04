@@ -25,8 +25,8 @@
 
       <div class="collapse navbar-collapse" id="categories" style="margin-top: 10px">
         <div class="navbar-nav">
-          <% Section.all.each do |section| %>
-            <a class="header-item nav-item nav-link active" href="#"><%= section.display_name %></a>
+          <% Section.limit(5).each do |section| %>
+            <%= link_to section.display_name, section_path(section), class: 'header-item nav-item nav-link active' %>
           <% end %>
         </div>
       </div>

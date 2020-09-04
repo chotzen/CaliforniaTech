@@ -1,0 +1,10 @@
+<h1>Issues</h1>
+<div class="divider"></div>
+<div class="row">
+  <% @issues.each do |issue| %>
+    <%= link_to issue_path(issue), class: "article-title" do %>
+      <h3 class="text-dark nomargin">Issue <%= issue.issue %></h3>
+    <% end %>
+    <p class="lead text-muted nomargin">Volume <%= issue.volume %> | Published <%= issue.date.strftime("%m/%d/%Y") %></p>
+  <% end %>
+</div>

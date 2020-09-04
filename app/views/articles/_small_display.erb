@@ -12,5 +12,5 @@
     <h5 class="mb-0 article-title text-dark"><%= params[:article].title %></h5>
   <% end %>
   <small class="text-muted">By <%= display_article_authors(params[:article]) %></small><br>
-  <small class="nomargin"><%= render_teaser(params[:article]).html_safe %></small>
+  <small class="nomargin"><%= params[:article].teaser.html_safe unless params[:article].teaser.nil? %></small>
 </div>

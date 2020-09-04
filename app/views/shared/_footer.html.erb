@@ -2,7 +2,7 @@
   <div class="container">
     <span class="text-white">
       <div class="row align-items-end">
-        <div class="col-lg-3 footer-content-left">
+        <div class="col-3 footer-content-left">
           <span class="footer-brand brand">
             The California Tech
           </span>
@@ -11,14 +11,32 @@
           <br>
           Copyright © 2020, ASCIT</small>
         </div>
-        <div class="col-lg-3 ">
+        <div class="col-2">
+          <% sections = Section.all %>
+          <% sections[0..3].each do |section| %>
+            <%= link_to section_path(section), class: "text-white" do %>
+              <small class="link-white"><%= section.display_name %></small><br>
+            <% end %>
+          <% end %>
         </div>
-        <div class="col-lg-3 footer-content-left">
+        <div class="col-2 footer-content-left h-100">
+          <% sections[4..].each do |section| %>
+            <%= link_to section_path(section), class: "text-white" do %>
+              <small class="link-white"><%= section.display_name %></small><br>
+            <% end %>
+          <% end %>
+          <%= link_to admin_articles_path, class: "text-white" do %>
+              <small class="link-white">Admin Panel</small><br>
+            <% end %>
         </div>
-        <div class="col-lg-3">
+        <div class="col-2 footer-content-left"></div>
+        <div class="col-3">
           <small class="footer-align-bottom">
             tech[at]caltech[dot]edu<br>
             Powered by <a class="text-white" href="http://lines.opoloo.com/">Lines</a>
+            <% if current_lines_user %>
+              <br><%= link_to "Log out", logout_path, class: 'text-white' %>
+            <% end %>
           </small>
         </div>
       </div>

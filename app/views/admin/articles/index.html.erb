@@ -1,60 +1,51 @@
+<div class="row">
+  <div class="col-md-8">
+    <% if @articles_unpublished.size > 0 %>
+      <h2>Unpublished Articles</h2>
+      <% @articles_unpublished.each do |article| %>
+        <div class="row">
 
-<% if @articles_unpublished.size > 0 %>
-  <h2><%= t('lines.unpublished_articles').html_safe %></h2>
-  <div class="articles-list">
-    <% @articles_unpublished.each do |article| %>
-      <div class="article unpublished">
-        <div class="title">
-          <%= link_to article.title, edit_admin_article_path(article), title: article.title %>
-        </div>
-        <div class="subtitle">
-          <%= link_to article.sub_title, edit_admin_article_path(article), title: article.sub_title %>
-        </div>
-        <div class="actions">
-          <div class="left">
-            <%= link_to t('lines.buttons.publish').html_safe, admin_article_toggle_publish_path(article), method: :post, class: "btn-publish" %>
+          <div class="col-8">
+            <%= link_to article_path(article), class: "article-title" do %>
+              <h4 class="mb-0 article-title text-dark"><%= article.title %></h4><p class="text-muted">By <%= display_article_authors(article) %></p>
+            <% end %>
           </div>
-          <div class="right">
-            <%= link_to t('lines.buttons.preview').html_safe, admin_article_path(article) %>
-            <%= link_to "", {controller: :articles, action: 'destroy', id: article.id}, data: { confirm: t('lines.confirm').html_safe }, class: "btn-delete icon-delete", method: :delete %>
+          <div class="col-4">
+            <%= link_to "Publish", admin_article_toggle_publish_path(article), method: :post, class: "btn-unpublish" %> |
+            <%= link_to "Edit", edit_admin_article_path(article) %>
           </div>
         </div>
+        <div class="divider"></div>
+
+      <% end %>
+    <% end %>
+
+    <% if @articles_published.size > 0 %>
+      <h2>Published Articles</h2>
+      <% @articles_published.each do |article| %>
+        <div class="row">
+
+          <div class="col-8">
+            <%= link_to article_path(article), class: "article-title" do %>
+              <h4 class="mb-0 article-title text-dark"><%= article.title %></h4><p class="text-muted">By <%= display_article_authors(article) %></p>
+            <% end %>
+          </div>
+          <div class="col-4">
+            <%= link_to "Unpublish", admin_article_toggle_publish_path(article), method: :post, class: "btn-unpublish" %> |
+            <%= link_to "Edit", edit_admin_article_path(article) %>
+          </div>
+        </div>
+        <div class="divider"></div>
+
+      <% end %>
+    <% end %>
+
+    <% if @articles_unpublished.size == 0 && @articles_published.size == 0 %>
+      <h2>There are no articles yet</h2>
+    <% else %>
+      <div id="pagination">
+        <%= paginate @articles, outer_window: 1, window: 2, theme: 'lines' %>
       </div>
     <% end %>
   </div>
-<% end %>
-
-<% if @articles_published.size > 0 %>
-  <h2><%= t('lines.published_articles').html_safe %></h2>
-  <div class="articles-list">
-    <% @articles_published.each do |article| %>
-      <div class="article published">
-        <div class="title">
-          <%= link_to article.title, edit_admin_article_path(article), title: article.title %>
-        </div>
-        <div class="subtitle">
-          <%= link_to article.sub_title, edit_admin_article_path(article), title: article.sub_title %>
-        </div>
-        <div class="actions">
-          <div class="left">
-            <% feature_class = article.featured ? 'btn-unfeature icon-unkeep' : 'btn-feature icon-keep' %>
-            <%= link_to "", admin_article_toggle_feature_path(article), method: :post, class: "#{feature_class}" %>
-            <%= link_to t('lines.buttons.unpublish').html_safe, admin_article_toggle_publish_path(article), method: :post, class: "btn-unpublish" %>
-          </div>
-          <div class="right">
-            <%= link_to t('lines.buttons.preview').html_safe, admin_article_path(article) %>
-            <%= link_to "", {controller: :articles, action: 'destroy', id: article.id}, data: { confirm: t('lines.confirm').html_safe }, class: "btn-delete icon-delete", method: :delete %>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
-<% end %>
-
-<% if @articles_unpublished.size == 0 && @articles_published.size == 0 %>
-  <h2>There are no articles yet</h2>
-<% else %>
-  <div id="pagination">
-    <%= paginate @articles, outer_window: 1, window: 2, theme: 'lines' %>
-  </div>
-<% end %>
+</div>
