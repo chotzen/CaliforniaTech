@@ -1,7 +1,9 @@
 <!-- this is the home page. -->
 <div class="row section">
   <div class="col-lg-6">
-    <%= render 'articles/article_feature', article: @main %>
+    <% if @main %>
+      <%= render 'articles/article_feature', article: @main %>
+    <% end %>
   </div>
   <div class="col-lg-3 border-lg-right border-sm-top border-lg-top-0">
     <h4 class="normal-weight text-dark">News</h4>
@@ -21,9 +23,13 @@
   </div>
 
   <div class="col-lg-6 border-lg-right ">
-    <%= render 'articles/horizontal_feature', article: @faculty_profile, heading: "Faculty Profile" unless @faculty_profile.nil?%>
-    <div class="divider" ></div>
-    <%= render 'articles/horizontal_feature', article: @culture_feature, heading: "Culture" unless @culture_feature.nil? %>
+    <% if @faculty_profile %>
+      <%= render 'articles/horizontal_feature', article: @faculty_profile, heading: "Faculty Profile" unless @faculty_profile.nil?%>
+      <div class="divider" ></div>
+    <% end %>
+    <% if @culture_feature %>
+      <%= render 'articles/horizontal_feature', article: @culture_feature, heading: "Culture" unless @culture_feature.nil? %>
+    <% end %>
   </div>
 
   <div class="col-lg-3">

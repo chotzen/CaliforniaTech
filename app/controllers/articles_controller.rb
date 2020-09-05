@@ -15,11 +15,11 @@ class ArticlesController < ApplicationController
   def index
     respond_to do |format|
       format.html {
-        @main = FeatureSlot.where(position: :main).first.article
+        @main = FeatureSlot.where(position: :main).first&.article
         @opinion = FeatureSlot.where(position: :opinion).has_article.map {|fs| fs.article}
         @side_news = FeatureSlot.where(position: :side_news).has_article.map {|fs| fs.article}
-        @faculty_profile = FeatureSlot.where(position: :faculty_profile).first.article
-        @culture_feature = FeatureSlot.where(position: :culture_feature).first.article
+        @faculty_profile = FeatureSlot.where(position: :faculty_profile).first&.article
+        @culture_feature = FeatureSlot.where(position: :culture_feature).first&.article
 
         @other_news = Article.where(feature_slot_id: nil).where.not(section_id: 6).published.limit(5)
         @announcements = Article.where(section_id: 6).published.limit(5)
