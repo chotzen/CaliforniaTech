@@ -12,27 +12,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <%= favicon_link_tag %>
   <%= yield :head %>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&family=Noto+Sans&family=Playfair+Display:wght@400;500;600;700&display=swap">
   <%= auto_discovery_link_tag(:atom, articles_url(format: "atom"), {title: CONFIG[:feed_title]}) %>
   <%= stylesheet_link_tag    "lines/application", media: "all" %>
   <%= stylesheet_link_tag    "application", media: "all" %>
-  <%= javascript_include_tag "lines/application" %>
   <%= csrf_meta_tags %>
 </head>
 
 <body class="vsc-initialized">
 
 <!--= render 'layouts/markdown_cheatsheet' %-->
-<div class="wrapper">
+<div class="wrapper container-xl">
+  <div class="col-lg-10 offset-lg-1 col-12">
+
+
   <%= render 'layouts/navbar', env: :public %>
 
   <main role="main" class="container">
     <%= render 'shared/flash' %>
     <%= yield %>
   </main>
+  </div>
 </div>
 
 
 <%= render 'shared/footer' %>
 
+<%= javascript_include_tag "application" %>
+<%= javascript_include_tag "lines/application" %>
 </body>
 </html>

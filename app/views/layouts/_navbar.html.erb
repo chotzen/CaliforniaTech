@@ -2,40 +2,29 @@
   <nav class="navbar navbar-light navbar-expand-lg">
     <div class="container page-header">
       <%= link_to "The California Tech", root_path, class: "brand brand-large navbar-brand highlight-orange" %>
-      <% if env == :admin %>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#categories" aria-controls="categories" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-categories" aria-controls="navbar-categories" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="categories" style="margin-top: 10px">
+        <div class="collapse navbar-collapse" id="navbar-categories" style="margin-top: 10px">
           <div class="navbar-nav">
-            <a class="header-item nav-item nav-link active text-muted" href="#">Admin Panel</a>
-            <%= link_to 'Articles', admin_articles_path, class: 'header-item nav-item nav-link active' %>
-            <%= link_to 'Layout', admin_feature_slots_path, class: 'header-item nav-item nav-link active'%>
-            <%= link_to 'Authors', admin_authors_path, class: 'header-item nav-item nav-link active'%>
+            <% if env == :admin %>
+              <a class="header-item nav-item nav-link active text-muted" href="#">Admin Panel</a>
+              <%= link_to 'Articles', admin_articles_path, class: 'header-item nav-item nav-link active' %>
+              <%= link_to 'Layout', admin_feature_slots_path, class: 'header-item nav-item nav-link active'%>
+              <%= link_to 'Authors', admin_authors_path, class: 'header-item nav-item nav-link active'%>
+            <% else %>
+              <% Section.limit(5).each do |section| %>
+                <%= link_to section.display_name, section_path(section), class: 'header-item nav-item nav-link active' %>
+              <% end %>
+           <% end %>
           </div>
         </div>
 
 
-      <% else %>
-
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#categories" aria-controls="categories" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="categories" style="margin-top: 10px">
-        <div class="navbar-nav">
-          <% Section.limit(5).each do |section| %>
-            <%= link_to section.display_name, section_path(section), class: 'header-item nav-item nav-link active' %>
-          <% end %>
+        <div class="justify-content-end">
+          <a href="#" class="btn btn-sm btn-outline-secondary" style="margin-top: 10px">Subscribe</a>
         </div>
-      </div>
-
-      <div class="justify-content-end">
-        <a href="#" class="btn btn-sm btn-outline-secondary" style="margin-top: 10px">Subscribe</a>
-      </div>
-
-      <% end  %>
     </div>
 
   </nav>
