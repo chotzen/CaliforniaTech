@@ -8,11 +8,11 @@ title: "The California Tech | Caltech Student News"             # Give your blog
 title_short: ""                                                            # Place the name of your blog or a short title here
 short_description: "News and opinions from the Caltech student body"         # Short description for your blog
 meta_description: "The California Tech | Caltech News"  # meta description tag
-meta_author: "John Doe"                                                         # meta tag for author
+meta_author: "ASCIT"                                                         # meta tag for author
 keywords: "Caltech, Undergrad, College, Student, Pasadena"                                          # your keywords
-og_logo: "https://opoloo.github.io/lines-engine/assets/images/lines-logo.jpg"   # OpenGraph logo
+og_logo: ""   # OpenGraph logo
 geo_position: "50.00; 8.27"                                                     # Geo tags for position and address
-geo_address: "Opoloo, 55116 Mainz"                                              # Geo tags for position and address
+geo_address: ""                                              # Geo tags for position and address
 meta_robots: "index,follow"
 
 

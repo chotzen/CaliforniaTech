@@ -1,7 +1,6 @@
 class Issue < ApplicationRecord
   has_many :articles
   has_one_attached :print_version, dependent: false
-  has_one_attached :print_version_thumbnail, dependent: false
 
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
@@ -19,18 +18,6 @@ class Issue < ApplicationRecord
 
     unless print_version.content_type == "application/pdf"
       errors.add(:print_version, "must be a PDF file")
-    end
-  end
-
-  def acceptable_thumbnail
-    return unless print_version_thumbnail.attached?
-
-    unless print_version_thumbnail.byte_size <= 16.megabyte
-      errors.add(:print_version_thumbnail, "is too big")
-    end
-
-    unless ["image/jpeg", "image/png"].include? print_version_thumbnail.content_type
-      errors.add(:print_version_thumbnail, "must be a JPEG or PNG file")
     end
   end
 
