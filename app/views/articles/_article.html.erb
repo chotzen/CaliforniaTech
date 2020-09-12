@@ -7,10 +7,10 @@
         <small class="text-muted"%>By <%= display_article_authors(article) %> | Published <%= article.published_at.strftime("%m/%d/%Y")%></small>
       </div>
       <div class="divider"></div>
-       <% if article.hero_image %>
+       <% if article.hero_image.attached? %>
         <div class="hero_image">
           <%= link_to article_path(article) do %>
-            <%= image_tag article.hero_image, alt: article.title, class: "img-fluid" %>
+            <%= image_tag url_for(article.hero_image), alt: article.title, class: "img-fluid" %>
           <% end %>
 
           <div class="img-caption text-muted">

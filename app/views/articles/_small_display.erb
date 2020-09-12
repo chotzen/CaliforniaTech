@@ -1,6 +1,6 @@
 <div>
   <% if params[:image] %>
-    <% unless params[:article].image_url.blank? %>
+    <% if params[:article].hero_image.attached? %>
       <div class="article-image">
         <%=  link_to article_path(params[:article]) do  %>
           <img src="<%=  params[:article].image_url  %>" alt="<%=  params[:article].title  %>" class="img-fluid"/>

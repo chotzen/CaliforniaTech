@@ -1,4 +1,6 @@
-<img src="<%= article.image_url %>" alt="<%= article.title %>"  class="img-fluid article-image" />
+<% if article.hero_image.attached? %>
+<img src="<%= url_for article.hero_image %>" alt="<%= article.title %>"  class="img-fluid article-image" />
+<% end %>
 <%= link_to article_path(article), class: "article-title" do %>
   <h2 class="mb-0 article-title text-dark nowrap"><%= article.title %></h2>
   <% end %>
