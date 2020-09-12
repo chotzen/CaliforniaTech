@@ -9,6 +9,7 @@ module Admin
 
     def new
       @issue = Issue.new()
+      @articles = Article.where(issue: nil)
     end
 
     def create
@@ -23,13 +24,14 @@ module Admin
 
     def edit
       @issue = Issue.friendly.find(params[:id])
+      @articles = Article.where(issue: [nil, @issue])
     end
 
     def update
       @issue = Issue.friendly.find(params[:id])
 
       if @issue.update_attributes(issue_params)
-        redirect_to admin_issue_path(@author)
+        redirect_to admin_issue_path(@issue)
       else
         render action: "edit"
       end
@@ -55,6 +57,6 @@ module Admin
     def issue_params
       params.require(:issue).permit(:volume, :issue, :date, :file, :preview_image, articles_attributes: [:id])
     end
-  end
 
+  end
 end

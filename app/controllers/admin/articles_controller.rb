@@ -11,7 +11,7 @@ module Admin
   class ArticlesController < ApplicationController
 
     autocomplete :tag, :name, class_name: 'ActsAsTaggableOn::Tag'
-    before_action :process_base64_upload, only: [:create, :update]
+    ##before_action :process_base64_upload, only: [:create, :update]
 
     # Lists all articles. Provides <tt>@articles_unpublished</tt> and
     # <tt>@articles_published</tt> to distinguish between published and
@@ -66,22 +66,20 @@ module Admin
     # TODO: Very much is happening here. Move deletion of hero_image to the article model
     def update
       @article = Article.friendly.find(params[:id])
-      a_params = article_params
-
-      # replace picture_path with the new uploaded file
-      a_params[:hero_image] = @uploaded_file if @uploaded_file
-
-      # delete uploaded hero image when predifined image is selected
-      if !a_params[:hero_image_cache].present? && a_params[:short_hero_image].present?
-        @article.remove_hero_image!
-        @article.remove_hero_image = true
-        @article.save
+      unless params[:article]
+        render action: "edit"
+        return
       end
+      a_params = article_params
 
       respond_to do |format|
         if @article.update_attributes(article_params)
           ActionController::Base.new.expire_fragment(@article)
-          format.html { redirect_to admin_article_path(@article) }
+          if article_params[:body_images] || article_params[:hero_image]
+            format.html { render action: "edit" }
+          else
+            format.html { redirect_to admin_article_path(@article) }
+          end
         else
           format.html { render action: "edit" }
         end
@@ -165,7 +163,7 @@ module Admin
         params.require(:article).permit(:content, :teaser, :hero_image, :short_hero_image, :published,
           :published_at, :sub_title, :title, :hero_image_cache, :hero_caption, :tag_list, :gplus_url, :featured, :section_id,
           :document, :document_cache, :hero_image_file, :remove_document, :remove_hero_image, :pictures, :author_bio,
-          pictures_attributes: [:id, :image, :name, :article_id], author_ids: [] )
+          pictures_attributes: [:id, :image, :name, :article_id], author_ids: [], body_images: [] )
       end
 
   end

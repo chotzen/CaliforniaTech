@@ -21,17 +21,19 @@ class Article < ApplicationRecord
   has_many :pictures
   has_many :authorables
   has_many :authors, through: :authorables
+  has_one_attached :hero_image
+  has_many_attached :body_images
   belongs_to :section
   belongs_to :feature_slot, optional: true
   belongs_to :issue, optional: true
 
-  attr_accessor :hero_image_file
-  accepts_nested_attributes_for :pictures, :authors
+  #attr_accessor :hero_image_file
+  accepts_nested_attributes_for :authors
 
 
   # Mount Carrierwave uploaders
-  mount_uploader :hero_image, HeroImageUploader
-  mount_uploader :document, DocumentUploader
+  #mount_uploader :hero_image, HeroImageUploader
+  #mount_uploader :document, DocumentUploader
 
   # Pagination and tagging
   paginates_per CONFIG[:articles_per_page]
@@ -39,10 +41,11 @@ class Article < ApplicationRecord
 
   # Validations
   validates :title, :content, :author_ids, :published_at, presence: true
+  validate :hero_image
   #validate :one_image_selected
 
   # Callbacks
-  after_save :update_used_images, :refresh_sitemap
+  after_save :refresh_sitemap
 
   # Model Scopes
   scope :published, -> { where(published: true).order("featured DESC, published_at DESC, created_at DESC") }
@@ -76,6 +79,19 @@ class Article < ApplicationRecord
   # Returns value of subtitle
   def sub_title
     read_attribute(:sub_title) || ''
+  end
+
+  def acceptable_image
+    return unless hero_image.attached?
+
+    unless hero_image.byte_size <= 1.megabyte
+      errors.add(:hero_image, "is too big")
+    end
+
+    acceptable_types = ["image/jpeg", "image/png"]
+    unless acceptable_types.include?(hero_image.content_type)
+      errors.add(:hero_image, "must be a JPEG or PNG")
+    end
   end
 
 private

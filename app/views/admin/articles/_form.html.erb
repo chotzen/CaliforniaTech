@@ -13,36 +13,35 @@
       </div>
     <% end %>
 
+    <% @article.body_images.each do |image| %>
+      <%= render 'admin/articles/picture', image: image %>
+    <% end %>
+
+    <%= form_for([:admin, @article],  id: 'article_form') do |f| %>
+      <div class="form-group row">
+        <%= f.label :hero_image %>
+        <%= f.file_field :hero_image %>
+      </div>
+      <div class="form-group row">
+        <%= f.label :body_images %>
+        <%= f.file_field :body_images, multiple: true %>
+      </div>
+
+      <%= f.submit "Upload Images" %>
+    <% end %>
+
+    <hr>
+
 
     <%= form_for([:admin, @article], id: 'article_form') do |f| %>
 
-
-      <div class="hero-upload">
-        <%= f.file_field :hero_image %>
-        <%= f.hidden_field :remove_hero_image %>
-        <div class="btn-change-hero"><%= t('lines.buttons.change') %></div>
-        <% if @article.short_hero_image.present? %>
-          <img src="<%= @article.short_hero_image %>" alt="" />
-        <% elsif @article.hero_image? %>
-          <img src="<%= @article.hero_image %>" alt="" />
-        <% end %>
-        <%= f.hidden_field :hero_image_file %>
-        <div class="upload-overlay">
-          <div class="upload-overlay-close icon-close"></div>
-          <div class="upload-overlay-inner">
-            <h2><%= t('lines.buttons.select_hero_image') %></h2>
-            <div class="btn-remove-hero<%= " show" if @article.hero_image? || @article.short_hero_image %>"><%= t('lines.buttons.remove_hero_image') %></div>
-            <%= f.label :hero_image, t('lines.buttons.upload_image') %>
-            <div class="hero-images">
-              <% Article::HERO_IMAGES.each_with_index do |h, i| %>
-                <img src="<%= "/heroes/#{h}" %>" alt="" class="<%= 'selected-hero-image' if ('/heroes/' + h) == @article.short_hero_image %>" />
-              <% end %>
-              <%= f.hidden_field :short_hero_image, class: "short-hero-image-cache" %>
-            </div>
-          </div>
-          <div class="hero-background-overlay"></div>
+      <div class="form-group row">
+        <%= f.label :hero_image, class: 'col-sm-2 col-form-label' %>
+        <div class="col-3">
+          <%= image_tag url_for(@article.hero_image), class: 'img-fluid' %>
         </div>
       </div>
+
 
       <div class="form-group row">
         <%= f.label :title, class: 'col-sm-2 col-form-label'%>
@@ -111,6 +110,9 @@
           <%= f.text_field :published_at, value: (@article.published_at || Time.now).strftime("%Y-%m-%d"), 'data-behaviour' => 'datepicker', placeholder: "Published on" %>
         </div>
       </div>
+
+
+
 
       <%= f.submit %>
 
