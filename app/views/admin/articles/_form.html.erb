@@ -37,9 +37,11 @@
 
       <div class="form-group row">
         <%= f.label :hero_image, class: 'col-sm-2 col-form-label' %>
+        <% if @article.hero_image.attached? %>
         <div class="col-3">
           <%= image_tag url_for(@article.hero_image), class: 'img-fluid' %>
         </div>
+        <% end %>
       </div>
 
 
