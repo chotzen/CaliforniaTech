@@ -9,7 +9,7 @@
   </div>
   <div class="col-6">
     <% if article.hero_image.attached? %>
-      <img src="<%= article.image_url %>" alt="<%= article.title %>" class="img-fluid " />
+      <img src="<%= url_for article.hero_image %>" alt="<%= article.title %>" class="img-fluid " />
     <% end %>
   </div>
 </div>

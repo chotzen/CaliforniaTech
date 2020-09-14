@@ -1,7 +1,13 @@
-<h1>Issues</h1>
-<div class="divider"></div>
 <div class="row">
-  <% @issues.each do |issue| %>
+  <h1 class="col-10">Issues</h1>
+  <div class="col-2">
+    <%= link_to "New Issue", new_admin_issue_path, class: 'btn btn-primary float-right' %>
+  </div>
+</div>
+<% if @unpublished.any? %>
+
+  <% @unpublished.each do |issue| %>
+    <div class="divider"></div>
     <div class="row">
       <div class="col-8">
         <%= link_to issue_path(issue), class: "article-title" do %>
@@ -10,8 +16,27 @@
         <p class="lead text-muted nomargin">Volume <%= issue.volume %> | Published <%= issue.date.strftime("%m/%d/%Y") %></p>
       </div>
       <div class="col-4">
-        <%= link_to "Edit", edit_admin_issue_path(issue) %> | <%= link_to "Publish", to: toggle_publish_admin_issue_path(issue) %>
+        <%= link_to "Edit", edit_admin_issue_path(issue) %> | <%= link_to "Publish", admin_issue_toggle_publish_path(issue), method: :post %>
       </div>
     </div>
   <% end %>
-</div>
+  </div>
+<% end %>
+<% if @published.any? %>
+  <div class="divider"></div>
+  <div class="row">
+    <% @published.each do |issue| %>
+      <div class="row">
+        <div class="col-8">
+          <%= link_to issue_path(issue), class: "article-title" do %>
+            <h3 class="text-dark nomargin">Issue <%= issue.issue %></h3>
+          <% end %>
+          <p class="lead text-muted nomargin">Volume <%= issue.volume %> | Published <%= issue.date.strftime("%m/%d/%Y") %></p>
+        </div>
+        <div class="col-4">
+          <%= link_to "Edit", edit_admin_issue_path(issue) %> | <%= link_to "Unpublish", admin_issue_toggle_publish_path(issue), method: :post %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

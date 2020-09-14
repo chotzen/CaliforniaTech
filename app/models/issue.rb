@@ -9,6 +9,8 @@ class Issue < ApplicationRecord
   validates_presence_of :volume, :issue, :date
   validate :acceptable_pdf_file
 
+  default_scope { order("volume DESC, issue DESC") }
+
   def acceptable_pdf_file
     return unless print_version.attached?
 
@@ -32,4 +34,17 @@ class Issue < ApplicationRecord
   def self.current_issue
     self.where(volume: 124).count + 1
   end
+
+  def pdf_url
+    return dev_url if Rails.env.development?
+
+    print_version.service_url.sub(/\?.*/, '')
+  end
+
+  private
+
+  def dev_url
+    Rails.application.routes.url_helpers.rails_blob_url(print_version, only_path: true)
+  end
+
 end

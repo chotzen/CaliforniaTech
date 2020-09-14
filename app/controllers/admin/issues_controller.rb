@@ -4,7 +4,8 @@ module Admin
   class IssuesController < ApplicationController
 
     def index
-      @issues = Issue.all
+      @published = Issue.where(published: true)
+      @unpublished = Issue.where(published: false)
     end
 
     def new
@@ -16,7 +17,7 @@ module Admin
       @issue = Issue.new(issue_params)
 
       if @issue.save
-        redirect_to admin_issue_path @author
+        redirect_to issue_path @issue
       else
         render action: "new"
       end
@@ -31,7 +32,7 @@ module Admin
       @issue = Issue.friendly.find(params[:id])
 
       if @issue.update_attributes(issue_params)
-        redirect_to admin_issue_path(@issue)
+        redirect_to issue_path(@issue)
       else
         render action: "edit"
       end
@@ -43,19 +44,20 @@ module Admin
     end
 
     def toggle_publish
-      issue = Issue.friendly.find(params[:id])
+      issue = Issue.friendly.find(params[:issue_id])
       if issue.published
         issue.update(published: false)
       else
         issue.update(published: true)
         issue.articles.update_all(published: true)
       end
+      redirect_to admin_issues_path
     end
 
     private
 
     def issue_params
-      params.require(:issue).permit(:volume, :issue, :date, :file, :preview_image, articles_attributes: [:id])
+      params.require(:issue).permit(:volume, :issue, :date, :file, :print_version, article_ids: [])
     end
 
   end

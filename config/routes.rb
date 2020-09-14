@@ -33,7 +33,7 @@ Rails.application.routes.draw do
     end
     resources :authors
     resources :issues, except: [:destroy] do
-      post :toggle_publish, on: :member
+      post :toggle_publish#, on: :member
     end
     resources :pictures, only: [:create, :update, :destroy]
     resources :users

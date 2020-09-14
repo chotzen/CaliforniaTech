@@ -3,8 +3,10 @@
 <div class="divider"></div>
 <div class="row">
   <div class="col-sm-3 border-sm-right">
-    pdf and preview image will go here eventually
-
+    <% if @issue.print_version.attached? %>
+      <%= link_to "Print Version", @issue.pdf_url %>
+      <%= image_tag url_for(@issue.print_version.preview(resize: "500 x500")), class: "img-fluid" %>
+    <% end %>
   </div>
   <div class="col-sm-9">
 
