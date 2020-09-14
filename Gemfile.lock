@@ -353,6 +353,8 @@ DEPENDENCIES
   factory_girl_rails
   faker
   friendly_id (>= 5.2.4)
+  gio2
+  gobject-introspection
   guard-rspec (= 4.2.0)
   i18n (>= 0.7.0)
   jbuilder (~> 2.5)

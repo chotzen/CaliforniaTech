@@ -34,6 +34,8 @@ gem 'bootstrap', '~> 5.0.0.alpha1'
 gem 'aws-sdk-s3', require: false
 gem 'poppler'
 gem 'mini_magick'
+gem 'gobject-introspection'
+gem 'gio2'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
