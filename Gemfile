@@ -32,10 +32,10 @@ gem 'meta-tags', '>= 2.0.0'
 gem 'i18n', '>= 0.7.0'
 gem 'bootstrap', '~> 5.0.0.alpha1'
 gem 'aws-sdk-s3', require: false
-gem 'poppler'
+#gem 'poppler'
 gem 'mini_magick'
-gem 'gobject-introspection'
-gem 'gio2'
+#gem 'gobject-introspection'
+#gem 'gio2'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
