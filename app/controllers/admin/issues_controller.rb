@@ -9,7 +9,7 @@ module Admin
     end
 
     def new
-      @issue = Issue.new()
+      @issue = Issue.new(issue: Issue.current_issue)
       @articles = Article.where(issue: nil)
     end
 
