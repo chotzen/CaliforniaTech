@@ -3,7 +3,7 @@
     <% if params[:article].hero_image.attached? %>
       <div class="article-image">
         <%=  link_to article_path(params[:article]) do  %>
-          <img src="<%= url_for params[:article].hero_image %>" alt="<%= params[:title].title %>" class="img-fluid " />
+          <img src="<%= url_for params[:article].hero_image %>" alt="<%= params[:article].title %>" class="img-fluid " />
         <% end %>
       </div>
     <% end %>
